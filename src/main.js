@@ -5,6 +5,8 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
+import { testApi } from './apis/test'
+testApi().then(res => console.log(res))
 
 const app = createApp(App)
 
