@@ -1,5 +1,17 @@
-<script setup>
 
+import { id } from 'element-plus/es/locale';
+<script setup>
+import { getCategory } from '@/apis/layout';
+import { onMounted, ref } from 'vue'
+
+const categoryList = ref([])
+const getCategoryList = async () => {
+    let { result: data } = await getCategory()
+    categoryList.value = data
+}
+onMounted(async () => {
+    getCategoryList()
+})
 </script>
 
 <template>
@@ -12,9 +24,7 @@
         <li class="home">
           <RouterLink to="/">首页</RouterLink>
         </li>
-        <li> <RouterLink to="/">居家</RouterLink> </li>
-        <li> <RouterLink to="/">美食</RouterLink> </li>
-        <li> <RouterLink to="/">服饰</RouterLink> </li>
+        <li v-for="item in categoryList" :key="item.id"> <RouterLink to="/">{{ item.name }}</RouterLink> </li>
       </ul>
       <div class="search">
         <i class="iconfont icon-search"></i>
