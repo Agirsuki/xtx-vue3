@@ -13,3 +13,5 @@ export const getNew = limit => request.get('/home/new', {
 })
 
 export const getHot = () => request.get('/home/hot')
+
+export const getGoods = () => request.get('/home/goods')
