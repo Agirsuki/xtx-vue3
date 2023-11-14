@@ -1,14 +1,14 @@
 <script setup>
 import { getCategory } from '@/apis/category';
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, onBeforeRouteUpdate } from 'vue-router'
 import { getBannerList } from '@/apis/home';
 import GoodsItem from '../Home/components/GoodsItem.vue';
 const route = useRoute()
 
 const category = ref({})
-const getCategoryData = async () => {
-    const { result } = await getCategory(route.params.id)
+const getCategoryData = async (id = route.params.id) => {
+    const { result } = await getCategory(id)
     console.log(result);
     category.value = result
 }
@@ -21,6 +21,14 @@ const getBanner = async () => {
     bannerList.value = result
 }
 onMounted(() => getBanner())
+
+// 避免组件复用导致生命周期钩子只执行一次
+// watch(
+//     () => route.params.id, 
+//     () => getCategoryData()
+// )
+// 路由发生改变 重新发送请求
+onBeforeRouteUpdate((to) => getCategoryData(to.params.id))
 </script>
 
 <template>
