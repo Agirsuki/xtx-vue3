@@ -1,34 +1,11 @@
 <script setup>
-import { getCategory } from '@/apis/category';
-import { ref, onMounted } from 'vue'
-import { useRoute, onBeforeRouteUpdate } from 'vue-router'
-import { getBannerList } from '@/apis/home';
 import GoodsItem from '../Home/components/GoodsItem.vue';
-const route = useRoute()
+import { useBanner } from './composables/useBanner.js'
+import { useCategory } from './composables/useCategory.js'
+const { bannerList } = useBanner()
+const { category } = useCategory()
+console.log(category);
 
-const category = ref({})
-const getCategoryData = async (id = route.params.id) => {
-    const { result } = await getCategory(id)
-    console.log(result);
-    category.value = result
-}
-onMounted(() => getCategoryData())
-
-// 轮播图
-const bannerList = ref([])
-const getBanner = async () => {
-    const { result } = await getBannerList({ distributionSite: '2' })
-    bannerList.value = result
-}
-onMounted(() => getBanner())
-
-// 避免组件复用导致生命周期钩子只执行一次
-// watch(
-//     () => route.params.id, 
-//     () => getCategoryData()
-// )
-// 路由发生改变 重新发送请求
-onBeforeRouteUpdate((to) => getCategoryData(to.params.id))
 </script>
 
 <template>
