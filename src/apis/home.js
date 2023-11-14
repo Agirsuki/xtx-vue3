@@ -1,8 +1,8 @@
 import request from '@/utils/http.js'
 
-export const getBannerList = distributionSite => request.get('/home/banner', {
+export const getBannerList = (params = { distributionSite: '1' }) => request.get('/home/banner', {
     params: {
-        distributionSite
+        ...params
     }
 })
 

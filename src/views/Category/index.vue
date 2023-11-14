@@ -2,6 +2,7 @@
 import { getCategory } from '@/apis/category';
 import { ref, onMounted, onUpdated } from 'vue'
 import { useRoute } from 'vue-router'
+import { getBannerList } from '@/apis/home';
 const route = useRoute()
 
 const category = ref({})
@@ -11,6 +12,15 @@ const getCategoryData = async () => {
 }
 onMounted(() => getCategoryData())
 onUpdated(() => getCategoryData())
+
+// 轮播图
+const bannerList = ref([])
+const getBanner = async () => {
+    const { result } = await getBannerList({ distributionSite: '2' })
+    bannerList.value = result
+}
+onMounted(() => getBanner())
+onUpdated(() => getBanner())
 </script>
 
 <template>
@@ -23,6 +33,14 @@ onUpdated(() => getCategoryData())
           <el-breadcrumb-item>{{ category.name }}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
+
+      <div class="home-banner">
+    <el-carousel height="500px">
+      <el-carousel-item v-for="item in bannerList" :key="item.id">
+        <img :src="item.imgUrl" alt="">
+      </el-carousel-item>
+    </el-carousel>
+  </div>
     </div>
   </div>
 </template>
@@ -104,6 +122,17 @@ onUpdated(() => getCategoryData())
 
   .bread-container {
     padding: 25px 0;
+  }
+}
+
+.home-banner {
+  width: 1240px;
+  height: 500px;
+  margin: 0 auto;
+
+  img {
+    width: 100%;
+    height: 500px;
   }
 }
 </style>
