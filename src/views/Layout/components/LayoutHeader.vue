@@ -1,17 +1,7 @@
-
-import { id } from 'element-plus/es/locale';
 <script setup>
-import { getCategory } from '@/apis/layout';
-import { onMounted, ref } from 'vue'
-
-const categoryList = ref([])
-const getCategoryList = async () => {
-    let { result: data } = await getCategory()
-    categoryList.value = data
-}
-onMounted(async () => {
-    getCategoryList()
-})
+import { useCategoryStore } from '@/stores/category.js'
+const categoryStore = useCategoryStore()
+console.log(categoryStore);
 </script>
 
 <template>
@@ -24,7 +14,7 @@ onMounted(async () => {
         <li class="home">
           <RouterLink to="/">首页</RouterLink>
         </li>
-        <li v-for="item in categoryList" :key="item.id"> <RouterLink to="/">{{ item.name }}</RouterLink> </li>
+        <li v-for="item in categoryStore.categoryList" :key="item.id"> <RouterLink to="/">{{ item.name }}</RouterLink> </li>
       </ul>
       <div class="search">
         <i class="iconfont icon-search"></i>
