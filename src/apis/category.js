@@ -17,3 +17,15 @@ export const getCategoryFilterAPI = (id) => request.get('/category/sub/filter', 
         id
     }
 })
+
+/**
+ * @description: 获取导航数据
+ * @data { 
+     categoryId: 1005000 ,
+     page: 1,
+     pageSize: 20,
+     sortField: 'publishTime' | 'orderNum' | 'evaluateNum'
+   } 
+ * @return {*}
+ */
+export const getSubCategoryAPI = data => request.post('/category/goods/temporary', data)
