@@ -14,7 +14,7 @@ const router = createRouter({
             // redirect: '/home',
             children: [
                 { path: '', component: Home },
-                { path: '/category', component: Category }
+                { path: '/category/:id', component: Category }
             ]
         },
         {

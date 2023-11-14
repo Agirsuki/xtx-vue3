@@ -1,13 +1,13 @@
 import request from '@/utils/http.js'
 
 export const getBannerList = distributionSite => request.get('/home/banner', {
-    query: {
+    params: {
         distributionSite
     }
 })
 
 export const getNew = limit => request.get('/home/new', {
-    query: {
+    params: {
         limit
     }
 })
