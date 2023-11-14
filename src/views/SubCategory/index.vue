@@ -21,13 +21,23 @@ const data = ref({
   sortField: 'publishTime'
 })
 const getSubCategory = async () => {
-    const { result } = await getSubCategoryAPI(data)
+    const { result } = await getSubCategoryAPI(data.value)
     console.log(result);
     goodsList.value = result
 }
 onMounted(() => getSubCategory())
 
 const tabChange = () => getSubCategory()
+
+// 获取更多数据
+const disabled = ref(false)
+const load = async () => {
+    data.value.page++
+    const { result } = await getSubCategoryAPI(data.value)
+    console.log(result);
+    goodsList.value.items = [...goodsList.value.items, ...result.items]
+    if(result.page >= result.pages) disabled.value = true
+}
 </script>
 
 <template>
@@ -47,7 +57,7 @@ const tabChange = () => getSubCategory()
         <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
         <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
       </el-tabs>
-      <div class="body">
+      <div class="body" v-infinite-scroll="load" :infinite-scroll-disabled="disabled">
          <!-- 商品列表-->
          <GoodsItem v-for="item in goodsList.items" :key="item.id" :good="item"></GoodsItem>
       </div>
