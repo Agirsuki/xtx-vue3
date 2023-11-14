@@ -5,3 +5,9 @@ export const getBannerList = distributionSite => request.get('/home/banner', {
         distributionSite
     }
 })
+
+export const getNew = limit => request.get('/home/new', {
+    query: {
+        limit
+    }
+})
