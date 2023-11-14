@@ -4,7 +4,7 @@ import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
-const goods = ref(null)
+const goods = ref({})
 const getGoods = async () => {
     const { result } = await getGoodsDetail(route.params.id)
     goods.value = result
@@ -13,14 +13,14 @@ onMounted(() => getGoods())
 </script>
 
 <template>
-  <div class="xtx-goods-page">
+  <div class="xtx-goods-page" v-if="goods.categories">
     <div class="container">
       <div class="bread-container">
         <el-breadcrumb separator=">">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{ path: `/category/${goods?.categories[1].id}` }">{{ goods?.categories[1].name }}
+        <el-breadcrumb-item :to="{ path: `/category/${goods.categories[1].id}` }">{{ goods.categories[1].name }}
         </el-breadcrumb-item>
-        <el-breadcrumb-item :to="{ path: `/category/sub/${goods?.categories[0].id}` }">{{ goods?.categories[0].name }}
+        <el-breadcrumb-item :to="{ path: `/category/sub/${goods.categories[0].id}` }">{{ goods.categories[0].name }}
         </el-breadcrumb-item>
           <el-breadcrumb-item>抓绒保暖，毛毛虫子儿童运动鞋</el-breadcrumb-item>
         </el-breadcrumb>

@@ -1,0 +1,32 @@
+[33m94f36f5[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m HEAD@{0}: commit: 详情基础数据渲染
+[33m6e10087[m HEAD@{1}: commit: 详情-结构搭建和路由配置
+[33m460954c[m HEAD@{2}: commit: 二级分类-列表无限加载实现
+[33m22a6990[m HEAD@{3}: commit: 商品列表筛选
+[33m04256d0[m HEAD@{4}: commit: 二级分类 基础列表渲染
+[33m54170e7[m HEAD@{5}: commit: 二级分类 面包屑导航实现
+[33m587d1f5[m HEAD@{6}: commit: 二级分类
+[33m0405bcb[m HEAD@{7}: commit: 按照业务拆分函数
+[33m7f3fc73[m HEAD@{8}: commit: 路由缓存问题解决
+[33mccce361[m HEAD@{9}: commit: 激活状态显示 分类列表渲染
+[33m0f8c4bc[m HEAD@{10}: commit: 一级分类轮播图
+[33m11f5167[m HEAD@{11}: commit: 一级分类面包屑导航渲染
+[33mac45ad6[m HEAD@{12}: commit: 商品项组件封装
+[33m9a93196[m HEAD@{13}: commit: home-商品列表渲染
+[33m91901fb[m HEAD@{14}: commit: 自定义指令优化
+[33mce3bbb7[m HEAD@{15}: commit: 图片懒加载指令封装
+[33m5f1e45f[m HEAD@{16}: commit: 人气推荐模板渲染
+[33m64fc22f[m HEAD@{17}: commit: home-新鲜好物模板渲染
+[33m10951f6[m HEAD@{18}: commit: home-面板组件封装
+[33m337011a[m HEAD@{19}: commit: banner轮播图
+[33m1a8dce9[m HEAD@{20}: commit: home分类数据渲染
+[33m5e3a8ee[m HEAD@{21}: commit: pinia优化重复请求
+[33m4441abb[m HEAD@{22}: commit: 吸顶导航交互实现
+[33mb6b2c52[m HEAD@{23}: commit: 渲染layout一级导航
+[33m8d88e01[m HEAD@{24}: commit: 字体图标引入
+[33m6aede08[m HEAD@{25}: commit: layout静态结构搭建
+[33mcb75f46[m HEAD@{26}: commit: scss自动导入
+[33md74daac[m HEAD@{27}: commit: 基本路由配置和静态资源引入
+[33ma5b6ede[m HEAD@{28}: commit: axios基础配置
+[33m688f868[m HEAD@{29}: commit: element主题色定制
+[33m9599ad3[m HEAD@{30}: commit: 添加element-plus
+[33m3649c0b[m HEAD@{31}: commit (initial): 添加@路径联想
