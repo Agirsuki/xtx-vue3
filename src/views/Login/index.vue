@@ -1,5 +1,10 @@
 <script setup>
 import { ref } from 'vue'
+import { login } from '@/apis/user.js'
+import 'element-plus/theme-chalk/el-message.css'
+import { ElMessage } from 'element-plus'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 // 表单对象
 const form = ref({
@@ -31,9 +36,16 @@ const rules = {
 
 // 登录
 const formEl = ref(null)
-const login = async () => {
-    const result = await formEl.value.validate()
-    
+const doLogin = async () => {
+    await formEl.value.validate()
+    const result = await login({
+        account: form.value.account, 
+        password: form.value.password
+    })
+    console.log(result);
+    ElMessage({ type: 'success', message: '登录成功' })
+    router.replace('/')
+}
 </script>
 
 
@@ -71,7 +83,7 @@ const login = async () => {
                   我已同意隐私条款和服务条款
                 </el-checkbox>
               </el-form-item>
-              <el-button size="large" class="subBtn" @click="login">点击登录</el-button>
+              <el-button size="large" class="subBtn" @click="doLogin">点击登录</el-button>
             </el-form>
           </div>
         </div>

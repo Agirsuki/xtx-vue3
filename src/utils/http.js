@@ -1,4 +1,6 @@
 import axios from "axios";
+import 'element-plus/theme-chalk/el-message.css'
+import { ElMessage } from 'element-plus'
 
 const baseURL = 'http://pcapi-xiaotuxian-front-devtest.itheima.net'
 
@@ -15,7 +17,13 @@ request.interceptors.request.use(
 )
 request.interceptors.response.use(
     res => res.data,
-    e => Promise.reject(e)
+    e => {
+        ElMessage({
+            type: 'error',
+            message: e.response.data.message
+        })
+        return Promise.reject(e)
+    }
 )
 
 
