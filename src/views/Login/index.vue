@@ -28,6 +28,12 @@ const rules = {
         }
     ]
 }
+
+// 登录
+const formEl = ref(null)
+const login = async () => {
+    const result = await formEl.value.validate()
+    
 </script>
 
 
@@ -52,7 +58,7 @@ const rules = {
         </nav>
         <div class="account-box">
           <div class="form">
-            <el-form label-position="right" label-width="60px" :model="form" :rules="rules"
+            <el-form ref="formEl" label-position="right" label-width="60px" :model="form" :rules="rules"
               status-icon>
               <el-form-item prop="account"  label="账户">
                 <el-input v-model="form.account"/>
@@ -65,7 +71,7 @@ const rules = {
                   我已同意隐私条款和服务条款
                 </el-checkbox>
               </el-form-item>
-              <el-button size="large" class="subBtn">点击登录</el-button>
+              <el-button size="large" class="subBtn" @click="login">点击登录</el-button>
             </el-form>
           </div>
         </div>
