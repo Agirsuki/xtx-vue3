@@ -115,8 +115,8 @@ onMounted(() => getGoods())
             </div>
             <!-- 24热榜+专题推荐 -->
             <div class="goods-aside">
-              <DetailHot></DetailHot>
-              <DetailHot></DetailHot>
+              <DetailHot :type="1"></DetailHot>
+              <DetailHot :type="2"></DetailHot>
             </div>
           </div>
         </div>
