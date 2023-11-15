@@ -24,7 +24,6 @@ const getHotList = async () => {
     type: props.type, 
     limit: 3
   })
-  console.log(result);
   hotList.value = result
 }
 onMounted(() => getHotList())
