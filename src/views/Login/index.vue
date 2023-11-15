@@ -1,9 +1,10 @@
 <script setup>
 import { ref } from 'vue'
-import { login } from '@/apis/user.js'
 import 'element-plus/theme-chalk/el-message.css'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/user.js'
+const userStore = useUserStore()
 const router = useRouter()
 
 // 表单对象
@@ -38,11 +39,10 @@ const rules = {
 const formEl = ref(null)
 const doLogin = async () => {
     await formEl.value.validate()
-    const result = await login({
+    await userStore.getUserInfo({
         account: form.value.account, 
         password: form.value.password
     })
-    console.log(result);
     ElMessage({ type: 'success', message: '登录成功' })
     router.replace('/')
 }
