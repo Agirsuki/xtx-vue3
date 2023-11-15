@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { login } from '@/apis/user.js'
 
 export const useUserStore = defineStore('user', () => {
@@ -8,8 +8,9 @@ export const useUserStore = defineStore('user', () => {
         const { result } = await login(user)
         userInfo.value = result
     }
-
+    const token = computed(() => userInfo.value.token)
     return {
+        token,
         userInfo,
         getUserInfo
     }

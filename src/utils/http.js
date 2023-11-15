@@ -1,6 +1,7 @@
 import axios from "axios";
 import 'element-plus/theme-chalk/el-message.css'
 import { ElMessage } from 'element-plus'
+import { useUserStore } from "@/stores/user";
 
 const baseURL = 'http://pcapi-xiaotuxian-front-devtest.itheima.net'
 
@@ -11,6 +12,9 @@ const request = axios.create({
 
 request.interceptors.request.use(
     config => {
+        const userStore = useUserStore()
+        const token = userStore.token
+        if (token) config.headers.Authorization = `Bearer ${token}`
         return config
     },
     error => Promise.reject(error)
