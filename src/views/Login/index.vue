@@ -6,7 +6,6 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user.js'
 const userStore = useUserStore()
 const router = useRouter()
-
 // 表单对象
 const form = ref({
     account: '', 
