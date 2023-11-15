@@ -9,10 +9,16 @@ export const useUserStore = defineStore('user', () => {
         userInfo.value = result
     }
     const token = computed(() => userInfo.value.token)
+    const nickname = computed(() => userInfo.value.nickname)
+    const clearUserInfo = () => {
+        userInfo.value = {}
+    }
     return {
+        nickname,
         token,
         userInfo,
-        getUserInfo
+        getUserInfo,
+        clearUserInfo
     }
 }, {
     persist: true
