@@ -28,4 +28,6 @@ export const useCartStore = defineStore('cart', () => {
         cartList,
         addCart
     }
+}, {
+    persist: true
 })
