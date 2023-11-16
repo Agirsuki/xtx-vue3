@@ -1,8 +1,14 @@
 <script setup>
 import { useCartStore } from '@/stores/cart.js'
 import { storeToRefs } from 'pinia';
-const { cartList, cartCount } = storeToRefs(useCartStore())
-const { remove } = useCartStore()
+const { cartList, cartCount, selectedCount, selectedPrice, isCheckedAll } = storeToRefs(useCartStore())
+const { remove, singleCheck, allCheck } = useCartStore()
+const singleToggle = (selected, goods) => {
+  singleCheck(selected, goods.skuId)
+}
+const allToggle = (selected) => {
+  allCheck(selected)
+}
 </script>
 
 <template>
@@ -13,7 +19,7 @@ const { remove } = useCartStore()
           <thead>
             <tr>
               <th width="120">
-                <el-checkbox/>
+                <el-checkbox :model-value="isCheckedAll" @change="allToggle"/>
               </th>
               <th width="400">商品信息</th>
               <th width="220">单价</th>
@@ -26,7 +32,7 @@ const { remove } = useCartStore()
           <tbody>
             <tr v-for="i in cartList" :key="i.id">
               <td>
-                <el-checkbox />
+                <el-checkbox :model-value="i.selected" @change="(selected) => singleToggle(selected, i)" />
               </td>
               <td>
                 <div class="goods">
@@ -73,8 +79,8 @@ const { remove } = useCartStore()
       <!-- 操作栏 -->
       <div class="action">
         <div class="batch">
-          共 {{ cartCount }} 件商品，已选择 {{  }} 件，商品合计：
-          <span class="red">¥ {{  }} </span>
+          共 {{ cartCount }} 件商品，已选择 {{ selectedCount }} 件，商品合计：
+          <span class="red">¥ {{ selectedPrice }} </span>
         </div>
         <div class="total">
           <el-button size="large" type="primary" >下单结算</el-button>
