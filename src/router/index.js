@@ -31,8 +31,9 @@ const router = createRouter({
                 { path: 'pay', component: Pay },
                 { path: 'paycallback', component: PayBack },
                 {
-                    path: 'member',
+                    path: '/member',
                     component: Member,
+                    redirect: '/member/user',
                     children: [
                         { path: 'user', component: UserInfo },
                         { path: 'order', component: UserOrder }
