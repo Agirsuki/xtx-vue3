@@ -1,18 +1,25 @@
 import { defineStore } from "pinia";
 import { ref, computed } from 'vue'
 import { useUserStore } from "./user";
-import { addCartApi, getCartApi } from "@/apis/cart";
+import { addCartApi, getCartApi, removeCartApi } from "@/apis/cart";
 
 export const useCartStore = defineStore('cart', () => {
     const userStore = useUserStore()
-        // 购物车
+
+    // 购物车
     const cartList = ref([])
-        // 添加购物车
+
+    // 获取购物车
+    const getCartList = async() => {
+        const { result } = await getCartApi()
+        cartList.value = result
+    }
+
+    // 添加购物车
     const addCart = async(goods) => {
             if (userStore.token) {
                 await addCartApi(goods)
-                const { result } = await getCartApi()
-                cartList.value = result
+                getCartList()
             } else {
                 const item = cartList.value.find(e => e.id === goods.id && e.skuId === goods.skuId)
                 if (item) {
@@ -23,7 +30,14 @@ export const useCartStore = defineStore('cart', () => {
             }
         }
         // 删除购物车中商品
-    const remove = (goodsId, skuId) => cartList.value = cartList.value.filter(item => item.id !== goodsId || item.skuId !== skuId)
+    const remove = async(goodsId, skuId) => {
+        if (userStore.token) {
+            await removeCartApi([skuId])
+            getCartList()
+        } else {
+            cartList.value = cartList.value.filter(item => item.id !== goodsId || item.skuId !== skuId)
+        }
+    }
 
     // 获取购物车总数
     const cartCount = computed(() => cartList.value.reduce((prev, current) => current.count + prev, 0))
