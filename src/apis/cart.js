@@ -16,3 +16,5 @@ export const removeCartApi = ids => request({
 })
 
 export const mergeCartApi = goodsList => request.post('/member/cart/merge', goodsList)
+
+export const createOrderApi = data => request.post('/member/order', data)

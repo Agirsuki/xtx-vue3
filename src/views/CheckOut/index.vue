@@ -2,6 +2,10 @@
 import { getCheckoutApi } from '@/apis/checkout.js' 
 import { ref, onMounted } from 'vue'
 import { updateAddressApi } from '@/apis/address.js'
+import { createOrderApi } from '@/apis/cart.js'
+import { useRouter } from 'vue-router'
+import { ElMessage } from 'element-plus'
+const router = useRouter()
 const checkInfo = ref({})  // 订单对象
 const defaultAddress = ref({})
 const getCheckoutInfo = async () => {
@@ -18,6 +22,28 @@ const chooseAddress = async () => {
   await updateAddressApi(activeAddress.value)
   defaultAddress.value = activeAddress.value
   visible.value = false
+}
+
+// 生成订单
+const submit = async () => {
+  if (!defaultAddress.value.id) return ElMessage.warning('请选择地址')
+    const { result } = await createOrderApi({
+        deliveryTimeType: 1, 
+        payType: 1, 
+        payChannel: 1, 
+        buyerMessage: '', 
+        goods: checkInfo.value.goods.map(goods => ({
+            skuId: goods.skuId, 
+            count: goods.count
+        })), 
+        addressId: defaultAddress.value.id
+    })
+    router.push({
+      path: '/pay', 
+      query: {
+        id: result.id
+      }
+    })
 }
 
 </script>
@@ -114,7 +140,7 @@ const chooseAddress = async () => {
         </div>
         <!-- 提交订单 -->
         <div class="submit">
-          <el-button type="primary" size="large" >提交订单</el-button>
+          <el-button type="primary" size="large" @click="submit" >提交订单</el-button>
         </div>
       </div>
     </div>
