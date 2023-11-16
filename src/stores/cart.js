@@ -39,6 +39,9 @@ export const useCartStore = defineStore('cart', () => {
         }
     }
 
+    // 清除购物车
+    const clearCart = () => cartList.value = []
+
     // 获取购物车总数
     const cartCount = computed(() => cartList.value.reduce((prev, current) => current.count + prev, 0))
 
@@ -61,6 +64,7 @@ export const useCartStore = defineStore('cart', () => {
 
     const allCheck = (selected) => cartList.value.forEach(goods => goods.selected = selected)
     return {
+        clearCart,
         allCheck,
         singleCheck,
         isCheckedAll,
