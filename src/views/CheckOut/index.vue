@@ -5,6 +5,7 @@ import { updateAddressApi } from '@/apis/address.js'
 import { createOrderApi } from '@/apis/cart.js'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
+
 const router = useRouter()
 const checkInfo = ref({})  // 订单对象
 const defaultAddress = ref({})
