@@ -2,7 +2,6 @@
 import { useCategoryStore } from '@/stores/category.js'
 import HeaderCart from './HeaderCart.vue';
 const categoryStore = useCategoryStore()
-console.log(categoryStore);
 </script>
 
 <template>
