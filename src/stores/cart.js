@@ -1,16 +1,25 @@
 import { defineStore } from "pinia";
 import { ref, computed } from 'vue'
+import { useUserStore } from "./user";
+import { addCartApi, getCartApi } from "@/apis/cart";
 
 export const useCartStore = defineStore('cart', () => {
-    // 购物车
+    const userStore = useUserStore()
+        // 购物车
     const cartList = ref([])
         // 添加购物车
-    const addCart = (goods) => {
-            const item = cartList.value.find(e => e.id === goods.id && e.skuId === goods.skuId)
-            if (item) {
-                item.count += goods.count
+    const addCart = async(goods) => {
+            if (userStore.token) {
+                await addCartApi(goods)
+                const { result } = await getCartApi()
+                cartList.value = result
             } else {
-                cartList.value.push(goods)
+                const item = cartList.value.find(e => e.id === goods.id && e.skuId === goods.skuId)
+                if (item) {
+                    item.count += goods.count
+                } else {
+                    cartList.value.push(goods)
+                }
             }
         }
         // 删除购物车中商品
